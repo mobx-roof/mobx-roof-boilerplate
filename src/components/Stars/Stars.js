@@ -5,10 +5,6 @@ import { observer } from 'mobx-roof';
 
 @observer('stars')
 class Stars extends Component {
-  componentWillMount() {
-    // todo
-    // this.props.stars.syncAll();
-  }
   renderData() {
     const { data: starsList, selectedStarId } = this.props.stars;
     if (!starsList.length) {
