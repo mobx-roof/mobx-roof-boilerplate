@@ -12,10 +12,12 @@ export default createModel({
   },
   actions: {
     async readmeFetch(repo, username, password) {
-      const result = await GithubAPI.getReadme(repo, username, password);
-      if (result && result.content) {
-        this.readme = marked(decodeURIComponent(escape(window.atob(result.content))));
-        this.repo = repo;
+      if (repo) {
+        const result = await GithubAPI.getReadme(repo, username, password);
+        if (result && result.content) {
+          this.readme = marked(decodeURIComponent(escape(window.atob(result.content))));
+          this.repo = repo;
+        }
       }
     },
   },
