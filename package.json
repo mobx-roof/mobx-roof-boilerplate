@@ -1,0 +1,45 @@
+{
+  "entry": {
+    "index": "./src/entry/index.js"
+  },
+  "dependencies": {
+    "atool-build": "~0.6.6",
+    "babel-polyfill": "^6.3.14",
+    "classnames": "^2.2.3",
+    "font-awesome": "^4.5.0",
+    "github-markdown-css": "^2.2.1",
+    "isomorphic-fetch": "^2.2.1",
+    "marked": "^0.3.5",
+    "mobx-roof": "^0.3.5-beta3",
+    "normalize.css": "^3.0.3",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "react-router": "^2.0.0-rc5"
+  },
+  "devDependencies": {
+    "babel-eslint": "^5.0.0-beta6",
+    "dora": "0.2.x",
+    "dora-plugin-atool-build": "0.4.x",
+    "dora-plugin-hmr": "0.3.x",
+    "dora-plugin-livereload": "0.2.x",
+    "dora-plugin-proxy": "0.5.x",
+    "electron-packager": "^5.2.1",
+    "electron-prebuilt": "^0.36.8",
+    "eslint": "1.10.x",
+    "eslint-config-airbnb": "3.x",
+    "eslint-plugin-react": "3.x",
+    "gh-pages": "^0.10.0",
+    "pre-commit": "1.x"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "scripts": {
+    "start": "electron ./main.js",
+    "start-hot": "HOT=1 electron ./main.js",
+    "build": "atool-build",
+    "dev": "dora --plugins proxy,atool-build,livereload?enableJs=false",
+    "lint": "eslint --ext .js,.jsx src",
+    "deploy": "npm run build && cp index.html ./dist/ && node ./scripts/deploy.js"
+  }
+}
