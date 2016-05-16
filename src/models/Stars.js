@@ -8,7 +8,7 @@ export default createModel({
     const stars = storage.stars || {};
     return {
       data: stars.data || [],
-      selectedStar: stars.selectedStar || '',
+      selectedStar: stars.selectedStar || { id: null, repo: null },
     };
   },
   actions: {
@@ -17,10 +17,19 @@ export default createModel({
       const data = await GithubAPI.fetchStars(url, username, password);
       if (data && data.result) {
         this.data = data.result.slice();
+        if (this.data.length > 0 && !this.selectedStar) {
+          const first = this.data[0];
+          this.starsSelect(first.id, first.name);
+        }
       }
     },
     starsSelect(id, repo) {
-      this.selectedStar = id;
+      if (this.selectedStar.id !== id) {
+        this.selectedStar = { id, repo };
+      }
+    },
+    async unStar(repo, username, password) {
+      await GithubAPI.unstar(repo, username, password);
     }
   }
 });

@@ -16,9 +16,15 @@ relation.listen('user.login', ({ context }) => {
   stars.sync(user.userInfo, user.username, user.password);
 });
 
+
+// Auto fetch the readme if selctedStar changed
 relation.autorun((context) => {
-  const { stars } = context.pick('user', 'stars');
-  console.log(stars.selectedStar);
+  const { stars, readme, user } = context.pick('user', 'stars', 'readme');
+  const selectedStar = stars.selectedStar;
+  // SetTimeout means just listen the `selectedStar`
+  setTimeout(() => {
+    readme.readmeFetch(selectedStar.repo, user.username, user.password);
+  });
 });
 
 // Auto save reactive data to localstorage

@@ -4,14 +4,10 @@ import style from './Detail.less';
 import classnames from 'classnames';
 import fa from 'font-awesome/css/font-awesome.css';
 import gm from 'github-markdown-css';
+import { observer } from 'mobx-roof';
 
+@observer(['stars', 'readme', 'user'])
 class Detail extends Component {
-  componentWillMount() {
-    const { repo } = this.props;
-    if (repo) {
-      this.props.actions.readmeFetch(repo);
-    }
-  }
   componentDidUpdate() {
     // Force reflow for electron
     const el = findDOMNode(this);
@@ -20,13 +16,15 @@ class Detail extends Component {
     el.style.display = '';
   }
   handleUnstar() {
-    this.props.actions.starsUnstar(this.props.repo);
+    this.props.stars.unStar(this.props.readme.repo, this.props.user.username, this.props.user.password);
   }
   handleInputClick(e) {
     e.target.select();
   }
   render() {
-    const { readmeLoading, unstarLoading, repo, readme } = this.props;
+    const { repo, readme } = this.props.readme;
+    const { loading: readmeLoading } = this.props.readme.getActionState('readmeFetch');
+    const { loading: unstarLoading } = this.props.stars.getActionState('unStar');
     if (!repo) {
       return <div />;
     }
@@ -53,7 +51,7 @@ class Detail extends Component {
           : ''
         }
         {
-          readme ? <div className={gm['markdown-body']} dangerouslySetInnerHTML={{__html: readme}} /> : ''
+          (!readmeLoading && readme) ? <div className={gm['markdown-body']} dangerouslySetInnerHTML={{__html: readme}} /> : ''
         }
       </div>
     </div>);

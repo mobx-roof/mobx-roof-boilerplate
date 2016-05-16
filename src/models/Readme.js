@@ -1,20 +1,22 @@
 import { createModel } from 'mobx-roof';
+import marked from 'marked';
 import * as GithubAPI from '../api/github';
 
 export default createModel({
   name: 'Readme',
   data() {
     return  {
+      repo: null,
+      readme: null,
     };
   },
   actions: {
-    async login(username, password) {
-      const userInfo = await GithubAPI.fetchUser(username, password);
-      if (userInfo.message) throw new Error('Login error ' + userInfo.message);
-      this.isLogin = true;
-      this.username = username;
-      this.password = password;
-      this.userInfo = userInfo;
+    async readmeFetch(repo, username, password) {
+      const result = await GithubAPI.getReadme(repo, username, password);
+      if (result) {
+        this.readme = marked(decodeURIComponent(escape(atob(result.content))));
+        this.repo = repo;
+      }
     },
   },
 });

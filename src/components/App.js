@@ -9,12 +9,14 @@ import Login from './Login/Login';
 import Header from './Header/Header';
 import Stars from './Stars/Stars';
 import Sidebar from './Sidebar/Sidebar';
+import Detail from './Detail/Detail';
 
 // models
 import UserModel from '../models/User';
 import StarsModel from '../models/Stars';
+import ReadmeModel from '../models/Readme';
 
-@context({ user: UserModel, stars: StarsModel }, { middleware, relation })
+@context({ user: UserModel, stars: StarsModel, readme: ReadmeModel }, { middleware, relation })
 export default class App extends Component {
   render() {
     const { user } = this.props;
@@ -26,6 +28,7 @@ export default class App extends Component {
       <div className={style.mainSection}>
         <Sidebar />
         <Stars />
+        <Detail />
       </div>
     </div>);
   }
