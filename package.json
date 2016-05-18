@@ -10,7 +10,7 @@
     "github-markdown-css": "^2.2.1",
     "isomorphic-fetch": "^2.2.1",
     "marked": "^0.3.5",
-    "mobx-roof": "^0.3.5-beta3",
+    "mobx-roof": "^0.3.5-beta6",
     "normalize.css": "^3.0.3",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",

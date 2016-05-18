@@ -1,6 +1,5 @@
 /**
  * Cancel action if action is pending
- * 
  */
 const pendingActionCache = {};
 class PendingError extends Error {}
@@ -22,11 +21,13 @@ function afterEffect({ action, payload, model }) {
   return payload;
 }
 
-function errorEffect({ payload }) {
+function errorEffect({ action, payload, model }) {
+  const key = getKey(model, action);
   if (payload instanceof PendingError) {
     // Don't catch pending error
     return null;
   }
+  pendingActionCache[key] = false;
   return payload;
 }
 

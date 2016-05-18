@@ -22,6 +22,7 @@ export default createModel({
           this.starsSelect(first.id, first.name);
         }
       }
+      return data;
     },
     starsSelect(id, repo) {
       if (this.selectedStar.id !== id) {

@@ -21,6 +21,7 @@ relation.listen('user.login', ({ context }) => {
 relation.autorun((context) => {
   const { stars, readme, user } = context.pick('user', 'stars', 'readme');
   const selectedStar = stars.selectedStar;
+  if (!selectedStar.repo) return;
   // SetTimeout means just listen the `selectedStar`
   setTimeout(() => {
     readme.readmeFetch(selectedStar.repo, user.username, user.password);
