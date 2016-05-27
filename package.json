@@ -10,7 +10,7 @@
     "github-markdown-css": "^2.2.1",
     "isomorphic-fetch": "^2.2.1",
     "marked": "^0.3.5",
-    "mobx-roof": "^0.3.5-beta6",
+    "mobx-roof": "0.4.0",
     "normalize.css": "^3.0.3",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
@@ -35,10 +35,8 @@
     "lint"
   ],
   "scripts": {
-    "start": "electron ./main.js",
-    "start-hot": "HOT=1 electron ./main.js",
+    "start": "dora --plugins proxy,atool-build,livereload?enableJs=false",
     "build": "atool-build",
-    "dev": "dora --plugins proxy,atool-build,livereload?enableJs=false",
     "lint": "eslint --ext .js,.jsx src",
     "deploy": "npm run build && cp index.html ./dist/ && node ./scripts/deploy.js"
   }
