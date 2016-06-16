@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { context } from 'mobx-roof';
 import style from './App.less';
-import middleware from '../middlewares';
 import relation from '../relations';
+// load middlewares
+import '../middlewares';
 
 // components
 import Login from './Login/Login';
@@ -16,7 +17,7 @@ import UserModel from '../models/User';
 import StarsModel from '../models/Stars';
 import ReadmeModel from '../models/Readme';
 
-@context({ user: UserModel, stars: StarsModel, readme: ReadmeModel }, { middleware, relation })
+@context({ user: UserModel, stars: StarsModel, readme: ReadmeModel }, { relation })
 export default class App extends Component {
   render() {
     const { user } = this.props;

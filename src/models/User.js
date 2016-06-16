@@ -4,14 +4,20 @@ import storage from '../common/storage';
 
 export default createModel({
   name: 'User',
-  data() {
+  data: {
+    isLogin: false,
+    password: null,
+    username: null,
+    userInfo: null || {},
+  },
+  init() {
     const user = storage.user || {};
-    return  {
+    this.set({
       isLogin: user.isLogin,
       password: user.password,
       username: user.username,
       userInfo: user.userInfo || {},
-    };
+    });
   },
   actions: {
     async login(username, password) {

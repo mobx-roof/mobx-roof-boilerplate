@@ -4,11 +4,9 @@ import * as GithubAPI from '../api/github';
 
 export default createModel({
   name: 'Readme',
-  data() {
-    return  {
-      repo: null,
-      readme: null,
-    };
+  data: {
+    repo: null,
+    readme: null,
   },
   actions: {
     async readmeFetch(repo, username, password) {

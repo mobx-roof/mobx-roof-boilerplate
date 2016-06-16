@@ -4,12 +4,16 @@ import storage from '../common/storage';
 
 export default createModel({
   name: 'Stars',
-  data() {
+  data: {
+    data: [],
+    selectedStar: {},
+  },
+  init() {
     const stars = storage.stars || {};
-    return {
+    this.set({
       data: stars.data || [],
       selectedStar: stars.selectedStar || { id: null, repo: null },
-    };
+    });
   },
   actions: {
     async sync(userInfo, username, password) {

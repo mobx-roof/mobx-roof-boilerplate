@@ -1,11 +1,9 @@
-import { Middleware } from 'mobx-roof';
+import { globalMiddleware } from 'mobx-roof';
 import logger from './logger';
 import recordSyncTimes from './recordSyncTimes';
 
-const middleware = new Middleware;
-middleware.use(
+globalMiddleware.use(
   logger,
   recordSyncTimes,
 );
-
-export default middleware;
+globalMiddleware.isGlobal = true;
